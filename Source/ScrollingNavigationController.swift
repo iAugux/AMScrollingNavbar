@@ -33,6 +33,8 @@ import UIKit
  */
 open class ScrollingNavigationController: UINavigationController, UIGestureRecognizerDelegate {
 
+  open var shouldShowNavbarWhenRotate = true
+
   /**
    Returns the `NavigationBarState` of the navigation bar
    */
@@ -198,6 +200,9 @@ open class ScrollingNavigationController: UINavigationController, UIGestureRecog
   // MARK: - Rotation handler
 
   func didRotate(_ notification: Notification) {
+
+    guard shouldShowNavbarWhenRotate else { return }
+
     showNavbar()
   }
 
@@ -207,6 +212,9 @@ open class ScrollingNavigationController: UINavigationController, UIGestureRecog
    */
   open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
+
+    guard shouldShowNavbarWhenRotate else { return }
+
     showNavbar()
   }
 
